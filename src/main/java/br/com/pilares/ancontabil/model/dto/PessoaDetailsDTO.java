@@ -2,7 +2,7 @@ package br.com.pilares.ancontabil.model.dto;
 
 import java.time.LocalDateTime;
 
-import br.com.pilares.ancontabil.model.entities.PessoaFisica;
+import br.com.pilares.ancontabil.model.entities.Pessoa;
 import br.com.pilares.ancontabil.model.enums.TipoPessoa;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,7 +17,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PessoaFisicaDetailsDTO {
+public class PessoaDetailsDTO {
 
 	private Long id;
 	private String hash;
@@ -28,7 +28,7 @@ public class PessoaFisicaDetailsDTO {
 	private LocalDateTime dataCadastro;
     private LocalDateTime dataAtualizacao;
 	
-    public PessoaFisicaDetailsDTO(PessoaFisica entity) {
+    public PessoaDetailsDTO(Pessoa entity) {
     	this.id = entity.getId();
     	this.hash = entity.getHash();
     	this.tipoPessoa = entity.getTipoPessoa();

@@ -1,10 +1,9 @@
 package br.com.pilares.ancontabil.model.dto;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import br.com.pilares.ancontabil.model.entities.PessoaFisica;
+import br.com.pilares.ancontabil.model.entities.Pessoa;
 import br.com.pilares.ancontabil.model.enums.TipoPessoa;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,7 +18,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PessoaFisicaDTO {
+public class PessoaDTO {
 
 	private Long id;
 	private String hash;
@@ -27,7 +26,7 @@ public class PessoaFisicaDTO {
 	private String documento;
 	private String nomeCompleto;
 	
-	public PessoaFisicaDTO(PessoaFisica entity) {
+	public PessoaDTO(Pessoa entity) {
 		this.id = entity.getId();
     	this.hash = entity.getHash();
     	this.tipoPessoa = entity.getTipoPessoa();
@@ -35,8 +34,8 @@ public class PessoaFisicaDTO {
     	this.nomeCompleto = entity.getNomeCompleto();
 	}
 	
-	public static List<PessoaFisicaDTO> converter(List<PessoaFisica> pessoas){
-		return pessoas.stream().map(PessoaFisicaDTO::new).collect(Collectors.toList());
+	public static List<PessoaDTO> converter(List<Pessoa> pessoas){
+		return pessoas.stream().map(PessoaDTO::new).collect(Collectors.toList());
 	}
 	
 }

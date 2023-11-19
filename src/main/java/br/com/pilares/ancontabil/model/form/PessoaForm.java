@@ -14,7 +14,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PessoaFisicaForm {
+public class PessoaForm {
 
 	private TipoPessoa tipoPessoa;
 	private String documento;
