@@ -1,0 +1,42 @@
+package br.com.pilares.ancontabil.model.dto;
+
+import java.time.LocalDateTime;
+
+import br.com.pilares.ancontabil.model.entities.PessoaFisica;
+import br.com.pilares.ancontabil.model.enums.TipoPessoa;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
+
+@Data
+@Getter
+@Setter
+@SuperBuilder
+@AllArgsConstructor
+@NoArgsConstructor
+public class PessoaFisicaDetailsDTO {
+
+	private Long id;
+	private String hash;
+	private TipoPessoa tipoPessoa;
+	private String documento;
+	private String nomeCompleto;
+	private boolean desabilitado;
+	private LocalDateTime dataCadastro;
+    private LocalDateTime dataAtualizacao;
+	
+    public PessoaFisicaDetailsDTO(PessoaFisica entity) {
+    	this.id = entity.getId();
+    	this.hash = entity.getHash();
+    	this.tipoPessoa = entity.getTipoPessoa();
+    	this.documento = entity.getDocumento();
+    	this.nomeCompleto = entity.getNomeCompleto();
+    	this.desabilitado = entity.isDesabilitado();
+    	this.dataCadastro = entity.getDataCadastro();
+    	this.dataAtualizacao = entity.getDataAtualizacao();
+    }
+    
+}
