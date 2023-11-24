@@ -20,11 +20,14 @@ public abstract class BaseService
 	private ER repository;
 	private EC converter;
 	
+	public void beforeCreate(F form){ }
+	public void afterCreate(F form, E entity){ }
+	
 	public BaseService(EC converter, ER repository) {
 		this.converter = converter;
 		this.repository = repository;
 	}
-	
+		
 	@Override
 	public List<D> getAll() {
 		return converter.ListEntityParaListDTO(repository.findAll());
@@ -37,11 +40,21 @@ public abstract class BaseService
 			return converter.entityParaDetailsDTO(optional.get());			
 		}
 		throw new NotFoundException();
+	}	
+
+	@Override
+	public E createBase(F form) {
+		beforeCreate(form);
+		E entity = repository.save(converter.formParaEntity(form));
+		afterCreate(form, entity);
+		return entity;
 	}
 		
 	@Override
 	public DD create(F form) {
+		beforeCreate(form);
 		E entity = repository.save(converter.formParaEntity(form));
+		afterCreate(form, entity);
 		return converter.entityParaDetailsDTO(entity);
 	}
 	

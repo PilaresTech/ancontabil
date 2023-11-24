@@ -3,7 +3,9 @@ package br.com.pilares.ancontabil.model.entities;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.ManyToOne;
 
+import br.com.pilares.ancontabil.converter.ContatoConverter;
 import br.com.pilares.ancontabil.model.enums.TipoPessoa;
 import br.com.pilares.ancontabil.model.form.PessoaForm;
 import br.com.pilares.ancontabil.model.form.PessoaFormEdit;
@@ -27,11 +29,14 @@ public class Pessoa extends EntityBase {
 	private TipoPessoa tipoPessoa;
 	private String documento;
 	private String nomeCompleto;
+	@ManyToOne
+	private Contato contato;
 	
 	public Pessoa(PessoaForm form) {
 		this.tipoPessoa = form.getTipoPessoa();
 		this.documento = form.getDocumento();
 		this.nomeCompleto = form.getNomeCompleto();
+		this.contato = form.getContato().getContato();
 	}
 	
 	public static Pessoa setarValoresEditar(Pessoa entity, PessoaFormEdit formEditar) {

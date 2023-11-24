@@ -19,5 +19,6 @@ public class PessoaForm {
 	private TipoPessoa tipoPessoa;
 	private String documento;
 	private String nomeCompleto;
+	private ContatoForm contato;
 	
 }

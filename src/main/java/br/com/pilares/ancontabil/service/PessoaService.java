@@ -1,5 +1,6 @@
 package br.com.pilares.ancontabil.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.pilares.ancontabil.converter.PessoaConverter;
@@ -16,5 +17,13 @@ public class PessoaService extends BaseService<PessoaRepository, PessoaConverter
 	public PessoaService(PessoaConverter converter, PessoaRepository repository) {
 		super(converter, repository);
 	}	
+	
+	@Autowired
+	private ContatoService contatoService;
+	
+	@Override
+	public void beforeCreate(PessoaForm form) {
+		form.getContato().setContato(contatoService.createBase(form.getContato()));
+	}
 	
 }

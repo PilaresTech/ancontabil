@@ -25,6 +25,7 @@ public class PessoaDTO {
 	private TipoPessoa tipoPessoa;
 	private String documento;
 	private String nomeCompleto;
+	private ContatoDTO contato;
 	
 	public PessoaDTO(Pessoa entity) {
 		this.id = entity.getId();
@@ -32,6 +33,7 @@ public class PessoaDTO {
     	this.tipoPessoa = entity.getTipoPessoa();
     	this.documento = entity.getDocumento();
     	this.nomeCompleto = entity.getNomeCompleto();
+    	this.contato = new ContatoDTO(entity.getContato());
 	}
 	
 	public static List<PessoaDTO> converter(List<Pessoa> pessoas){

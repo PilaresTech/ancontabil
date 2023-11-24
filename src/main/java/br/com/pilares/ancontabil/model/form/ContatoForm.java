@@ -1,5 +1,6 @@
 package br.com.pilares.ancontabil.model.form;
 
+import br.com.pilares.ancontabil.model.entities.Contato;
 import br.com.pilares.ancontabil.model.enums.TipoPessoa;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,11 +15,11 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PessoaFormEdit {
+public class ContatoForm {
 
-	private TipoPessoa tipoPessoa;
-	private String documento;
-	private String nomeCompleto;
-	private ContatoForm contato;
+	private String email;
+	private String telefone;
+	private String whatsapp;
+	private Contato contato = new Contato();
 	
 }

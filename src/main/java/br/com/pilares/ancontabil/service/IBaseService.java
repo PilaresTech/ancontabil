@@ -10,6 +10,7 @@ public interface IBaseService<E extends EntityBase, F, FE, D, DD> {
 
 	List<D> getAll();
 	DD getById(Long id) throws NotFoundException;
+	E createBase(F form);
 	DD create(F form);
 	DD edit(Long id, FE formEdit) throws NotFoundException;
 	void disable(Long id) throws NotFoundException;

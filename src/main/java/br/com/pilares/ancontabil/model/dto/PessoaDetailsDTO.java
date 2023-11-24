@@ -27,6 +27,7 @@ public class PessoaDetailsDTO {
 	private boolean desabilitado;
 	private LocalDateTime dataCadastro;
     private LocalDateTime dataAtualizacao;
+    private ContatoDTO contato;
 	
     public PessoaDetailsDTO(Pessoa entity) {
     	this.id = entity.getId();
@@ -37,6 +38,7 @@ public class PessoaDetailsDTO {
     	this.desabilitado = entity.isDesabilitado();
     	this.dataCadastro = entity.getDataCadastro();
     	this.dataAtualizacao = entity.getDataAtualizacao();
+    	this.contato = new ContatoDTO(entity.getContato());
     }
     
 }
