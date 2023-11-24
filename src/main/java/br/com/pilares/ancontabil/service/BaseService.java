@@ -3,19 +3,20 @@ package br.com.pilares.ancontabil.service;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Service;
 
-import br.com.pilares.ancontabil.converter.ConverterBase;
+import br.com.pilares.ancontabil.converter.IConverterBase;
+import br.com.pilares.ancontabil.model.dto.BaseDTO;
+import br.com.pilares.ancontabil.model.dto.BaseDetailsDTO;
 import br.com.pilares.ancontabil.model.entities.EntityBase;
 import br.com.pilares.ancontabil.model.form.FormBase;
+import br.com.pilares.ancontabil.repository.BaseRepository;
 
 public abstract class BaseService 
-	<ER extends JpaRepository<E, Long>, 
-	EC extends ConverterBase<E, F, FE, D, DD>, 
-	E extends EntityBase, F extends FormBase<E>, FE extends FormBase<E>, D, DD> 
+	<ER extends BaseRepository<E>, 
+	EC extends IConverterBase<E, F, FE, D, DD>, 
+	E extends EntityBase, F extends FormBase<E>, FE extends FormBase<E>, D extends BaseDTO<E, D>, DD extends BaseDetailsDTO<E>> 
 	implements IBaseService<E, F, FE, D, DD>{
 
 	private ER repository;
@@ -31,7 +32,7 @@ public abstract class BaseService
 		
 	@Override
 	public List<D> getAll() {
-		return converter.ListEntityParaListDTO(repository.findAll());
+		return converter.ListEntityParaListDTO(repository.findByDesabilitado(false));
 	}
 	
 	@Override

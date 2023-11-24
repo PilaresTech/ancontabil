@@ -18,26 +18,19 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PessoaDTO {
+public class PessoaDTO extends BaseDTO<Pessoa, PessoaDTO>{
 
-	private Long id;
-	private String hash;
 	private TipoPessoa tipoPessoa;
 	private String documento;
 	private String nomeCompleto;
 	private ContatoDTO contato;
 	
 	public PessoaDTO(Pessoa entity) {
-		this.id = entity.getId();
-    	this.hash = entity.getHash();
+		this.setDateBaseDTO(entity);
     	this.tipoPessoa = entity.getTipoPessoa();
     	this.documento = entity.getDocumento();
     	this.nomeCompleto = entity.getNomeCompleto();
     	this.contato = new ContatoDTO(entity.getContato());
-	}
-	
-	public static List<PessoaDTO> converter(List<Pessoa> pessoas){
-		return pessoas.stream().map(PessoaDTO::new).collect(Collectors.toList());
 	}
 	
 }

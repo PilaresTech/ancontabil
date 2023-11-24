@@ -5,15 +5,18 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import br.com.pilares.ancontabil.model.dto.ContatoDTO;
+import br.com.pilares.ancontabil.model.dto.ContratoDetailsDTO;
 import br.com.pilares.ancontabil.model.entities.Contato;
 import br.com.pilares.ancontabil.model.form.ContatoForm;
 
 @Service
-public class ContatoConverter implements ConverterBase<Contato, ContatoForm, ContatoForm, ContatoDTO, ContatoDTO>{
+public class ContatoConverter implements IConverterBase<Contato, ContatoForm, ContatoForm, ContatoDTO, ContratoDetailsDTO>{
 
+	
+	
 	@Override
-	public ContatoDTO entityParaDetailsDTO(Contato entity) {
-		return new ContatoDTO(entity);
+	public ContratoDetailsDTO entityParaDetailsDTO(Contato entity) {
+		return new ContratoDetailsDTO(entity);
 	}
 	
 	@Override
@@ -28,7 +31,8 @@ public class ContatoConverter implements ConverterBase<Contato, ContatoForm, Con
 	
 	@Override
 	public List<ContatoDTO> ListEntityParaListDTO(List<Contato> entitys) {
-		return ContatoDTO.converter(entitys);
+		ContatoDTO dd = new ContatoDTO();
+		return dd.converter(entitys, ContatoDTO.class);
 	}
 	
 	@Override

@@ -11,7 +11,7 @@ import br.com.pilares.ancontabil.model.form.PessoaForm;
 import br.com.pilares.ancontabil.model.form.PessoaFormEdit;
 
 @Service
-public class PessoaConverter implements ConverterBase<Pessoa, 
+public class PessoaConverter implements IConverterBase<Pessoa, 
 	PessoaForm, 
 	PessoaFormEdit, 
 	PessoaDTO, 
@@ -34,7 +34,8 @@ public class PessoaConverter implements ConverterBase<Pessoa,
 	
 	@Override
 	public List<PessoaDTO> ListEntityParaListDTO(List<Pessoa> entitys) {
-		return PessoaDTO.converter(entitys);
+		PessoaDTO d = new PessoaDTO();
+		return d.converter(entitys, PessoaDTO.class);
 	}
 	
 	@Override

@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 
+import br.com.pilares.ancontabil.model.dto.BaseDTO;
+import br.com.pilares.ancontabil.model.dto.BaseDetailsDTO;
 import br.com.pilares.ancontabil.model.entities.EntityBase;
 import br.com.pilares.ancontabil.model.form.FormBase;
 
-public interface IBaseService<E extends EntityBase, F extends FormBase<E>, FE extends FormBase<E>, D, DD> {
+public interface IBaseService<E extends EntityBase, F extends FormBase<E>, FE extends FormBase<E>, D extends BaseDTO<E, D>, DD extends BaseDetailsDTO<E>> {
 
 	List<D> getAll();
 	DD getById(Long id) throws NotFoundException;
