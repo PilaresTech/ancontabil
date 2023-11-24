@@ -5,8 +5,9 @@ import java.util.List;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 
 import br.com.pilares.ancontabil.model.entities.EntityBase;
+import br.com.pilares.ancontabil.model.form.FormBase;
 
-public interface IBaseService<E extends EntityBase, F, FE, D, DD> {
+public interface IBaseService<E extends EntityBase, F extends FormBase<E>, FE extends FormBase<E>, D, DD> {
 
 	List<D> getAll();
 	DD getById(Long id) throws NotFoundException;

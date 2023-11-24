@@ -12,12 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.pilares.ancontabil.factory.IBaseFactory;
 import br.com.pilares.ancontabil.model.entities.EntityBase;
+import br.com.pilares.ancontabil.model.form.FormBase;
 import br.com.pilares.ancontabil.service.IBaseService;
 
 @RestController
 public abstract class BaseController<
 	S extends IBaseService<E, F, FE, D, DD>, 
-	E extends EntityBase, F, FE, D, DD>
+	E extends EntityBase, F extends FormBase<E>, FE extends FormBase<E>, D, DD>
 	implements IBaseController<
 	S, E, F, FE, D, DD>{
 	

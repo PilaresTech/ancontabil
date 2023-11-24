@@ -36,7 +36,7 @@ public class Pessoa extends EntityBase {
 		this.tipoPessoa = form.getTipoPessoa();
 		this.documento = form.getDocumento();
 		this.nomeCompleto = form.getNomeCompleto();
-		this.contato = form.getContato().getContato();
+		this.contato = form.getContato().getEntity();
 	}
 	
 	public static Pessoa setarValoresEditar(Pessoa entity, PessoaFormEdit formEditar) {

@@ -1,7 +1,5 @@
 package br.com.pilares.ancontabil.model.form;
 
-import br.com.pilares.ancontabil.model.entities.Pessoa;
-import br.com.pilares.ancontabil.model.enums.TipoPessoa;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -15,11 +13,8 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PessoaForm extends FormBase<Pessoa>{
-
-	private TipoPessoa tipoPessoa;
-	private String documento;
-	private String nomeCompleto;
-	private ContatoForm contato;
+public class FormBase<E> {
 	
+	private E entity;
+
 }

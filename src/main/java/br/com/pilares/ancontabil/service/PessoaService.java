@@ -23,7 +23,7 @@ public class PessoaService extends BaseService<PessoaRepository, PessoaConverter
 	
 	@Override
 	public void beforeCreate(PessoaForm form) {
-		form.getContato().setContato(contatoService.createBase(form.getContato()));
+		form.getContato().setEntity(contatoService.createBase(form.getContato()));
 	}
 	
 }

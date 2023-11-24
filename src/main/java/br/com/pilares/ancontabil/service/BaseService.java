@@ -10,11 +10,12 @@ import org.springframework.stereotype.Service;
 
 import br.com.pilares.ancontabil.converter.ConverterBase;
 import br.com.pilares.ancontabil.model.entities.EntityBase;
+import br.com.pilares.ancontabil.model.form.FormBase;
 
 public abstract class BaseService 
 	<ER extends JpaRepository<E, Long>, 
 	EC extends ConverterBase<E, F, FE, D, DD>, 
-	E extends EntityBase, F, FE, D, DD> 
+	E extends EntityBase, F extends FormBase<E>, FE extends FormBase<E>, D, DD> 
 	implements IBaseService<E, F, FE, D, DD>{
 
 	private ER repository;

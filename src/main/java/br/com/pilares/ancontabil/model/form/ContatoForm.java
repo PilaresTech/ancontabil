@@ -15,11 +15,10 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ContatoForm {
+public class ContatoForm extends FormBase<Contato> {
 
 	private String email;
 	private String telefone;
 	private String whatsapp;
-	private Contato contato = new Contato();
 	
 }
