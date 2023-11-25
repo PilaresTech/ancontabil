@@ -23,7 +23,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Pessoa extends EntityBase {
+public class Pessoa extends EntityBase<Pessoa, PessoaFormEdit> {
 
 	@Enumerated(EnumType.STRING)
 	private TipoPessoa tipoPessoa;
@@ -39,7 +39,7 @@ public class Pessoa extends EntityBase {
 		this.contato = form.getContato().getEntity();
 	}
 	
-	public static Pessoa setarValoresEditar(Pessoa entity, PessoaFormEdit formEditar) {
+	public Pessoa setarValoresEditar(Pessoa entity, PessoaFormEdit formEditar) {
 		entity.setTipoPessoa(formEditar.getTipoPessoa());
 		entity.setDocumento(formEditar.getDocumento());
 		entity.setNomeCompleto(formEditar.getNomeCompleto());

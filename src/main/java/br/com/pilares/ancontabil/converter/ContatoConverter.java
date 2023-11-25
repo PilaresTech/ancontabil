@@ -5,18 +5,16 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import br.com.pilares.ancontabil.model.dto.ContatoDTO;
-import br.com.pilares.ancontabil.model.dto.ContratoDetailsDTO;
+import br.com.pilares.ancontabil.model.dto.ContatoDetailsDTO;
 import br.com.pilares.ancontabil.model.entities.Contato;
 import br.com.pilares.ancontabil.model.form.ContatoForm;
 
 @Service
-public class ContatoConverter implements IConverterBase<Contato, ContatoForm, ContatoForm, ContatoDTO, ContratoDetailsDTO>{
-
-	
+public class ContatoConverter implements IConverterBase<Contato, ContatoForm, ContatoForm, ContatoDTO, ContatoDetailsDTO>{
 	
 	@Override
-	public ContratoDetailsDTO entityParaDetailsDTO(Contato entity) {
-		return new ContratoDetailsDTO(entity);
+	public ContatoDetailsDTO entityParaDetailsDTO(Contato entity) {
+		return new ContatoDetailsDTO(entity);
 	}
 	
 	@Override
@@ -31,13 +29,12 @@ public class ContatoConverter implements IConverterBase<Contato, ContatoForm, Co
 	
 	@Override
 	public List<ContatoDTO> ListEntityParaListDTO(List<Contato> entitys) {
-		ContatoDTO dd = new ContatoDTO();
-		return dd.converter(entitys, ContatoDTO.class);
+		return new ContatoDTO().converter(entitys, ContatoDTO.class);
 	}
 	
 	@Override
 	public Contato setarValoresEditar(Contato entity, ContatoForm formEditar) {
-		return Contato.setarValoresEditar(entity, formEditar);
+		return new Contato().setarValoresEditar(entity, formEditar);
 	}
 	
 }

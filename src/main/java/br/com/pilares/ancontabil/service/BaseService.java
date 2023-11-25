@@ -42,7 +42,13 @@ public abstract class BaseService
 			return converter.entityParaDetailsDTO(optional.get());			
 		}
 		throw new NotFoundException();
-	}	
+	}
+	
+	@Override
+	public List<E> getList(List<Long> ids) {
+		return repository.findAllById(ids);
+		
+	}
 
 	@Override
 	public E createBase(F form) {

@@ -18,17 +18,14 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProdutoDTO extends BaseDTO<Produto, ProdutoDTO> {
-	
-	private Long id;
-	private String hash;
+
 	private TipoProduto tipoProduto;
 	private String nome;
 	private String descricao;
 	private BigDecimal valor;
 	
 	public ProdutoDTO(Produto entity) {
-    	this.id = entity.getId();
-    	this.hash = entity.getHash();
+		setDateBaseDTO(entity);
     	this.tipoProduto = entity.getTipoProduto();
     	this.nome = entity.getNome();
     	this.descricao = entity.getDescricao();

@@ -30,13 +30,12 @@ public class ProdutoConverter implements IConverterBase<Produto, ProdutoForm, Pr
 	
 	@Override
 	public List<ProdutoDTO> ListEntityParaListDTO(List<Produto> entitys) {
-		ProdutoDTO d = new ProdutoDTO();
-		return d.converter(entitys, ProdutoDTO.class);
+		return new ProdutoDTO().converter(entitys, ProdutoDTO.class);
 	}
 	
 	@Override
 	public Produto setarValoresEditar(Produto entity, ProdutoEditForm formEditar) {
-		return Produto.setarValoresEditar(entity, formEditar);
+		return new Produto().setarValoresEditar(entity, formEditar);
 	}
 	
 }

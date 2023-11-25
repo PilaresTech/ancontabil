@@ -17,7 +17,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Contato extends EntityBase{
+public class Contato extends EntityBase<Contato, ContatoForm>{
 
 	private String email;
 	private String telefone;
@@ -29,7 +29,8 @@ public class Contato extends EntityBase{
 		this.whatsapp = form.getWhatsapp();
 	}
 	
-	public static Contato setarValoresEditar(Contato entity, ContatoForm formEditar) {
+	@Override
+	public Contato setarValoresEditar(Contato entity, ContatoForm formEditar) {
 		entity.setEmail(formEditar.getEmail());
 		entity.setTelefone(formEditar.getTelefone());
 		entity.setWhatsapp(formEditar.getWhatsapp());

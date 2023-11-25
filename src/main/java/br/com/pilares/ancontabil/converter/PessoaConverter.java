@@ -34,13 +34,12 @@ public class PessoaConverter implements IConverterBase<Pessoa,
 	
 	@Override
 	public List<PessoaDTO> ListEntityParaListDTO(List<Pessoa> entitys) {
-		PessoaDTO d = new PessoaDTO();
-		return d.converter(entitys, PessoaDTO.class);
+		return new PessoaDTO().converter(entitys, PessoaDTO.class);
 	}
 	
 	@Override
 	public Pessoa setarValoresEditar(Pessoa entity, PessoaFormEdit formEditar) {
-		return Pessoa.setarValoresEditar(entity, formEditar);
+		return new Pessoa().setarValoresEditar(entity, formEditar);
 	}
 	
 }

@@ -24,7 +24,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Produto extends EntityBase {
+public class Produto extends EntityBase<Produto, ProdutoEditForm> {
 
 	@Enumerated(EnumType.STRING)
 	private TipoProduto tipoProduto;
@@ -39,7 +39,8 @@ public class Produto extends EntityBase {
 		this.valor = form.getValor();
 	}
 	
-	public static Produto setarValoresEditar(Produto entity, ProdutoEditForm formEditar) {
+	@Override
+	public Produto setarValoresEditar(Produto entity, ProdutoEditForm formEditar) {
 		entity.setNome(formEditar.getNome());
 		entity.setDescricao(formEditar.getDescricao());
 		entity.setValor(formEditar.getValor());

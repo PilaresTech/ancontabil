@@ -19,7 +19,7 @@ import lombok.experimental.SuperBuilder;
 @MappedSuperclass
 @Data
 @SuperBuilder(toBuilder = true)
-public abstract class EntityBase implements Serializable {
+public abstract class EntityBase<E, FE> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -58,6 +58,10 @@ public abstract class EntityBase implements Serializable {
     		this.setHash(UUID.randomUUID().toString());    		
     	}
     	this.desabilitado = false;
+    }
+    
+    public E setarValoresEditar(E entity, FE formEditar){
+    	return entity;
     }
     
 }
