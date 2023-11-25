@@ -17,19 +17,19 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ContratoDetailsDTO extends BaseDetailsDTO<Contrato>{
+public class ContratoDTO extends BaseDTO<Contrato, ContratoDTO>{
 
 	private String titulo;
 	private BigDecimal valorMensal;
 	private List<ProdutoDTO> produtos;
 	
-	
-	public ContratoDetailsDTO(Contrato entity) {
+	public ContratoDTO(Contrato entity) {
 		ProdutoDTO produtoDTO = new ProdutoDTO();
-		this.setDataBaseDetailsDTO(entity);
+		setDateBaseDTO(entity);
 		this.setTitulo(entity.getTitulo());
 		this.setValorMensal(entity.getValorMensal());
-		this.setProdutos(produtoDTO.converter(entity.getProdutos(), ProdutoDTO.class));
-	}
+    	this.setProdutos(produtoDTO.converter(entity.getProdutos(), ProdutoDTO.class));
+
+    }
 	
 }
