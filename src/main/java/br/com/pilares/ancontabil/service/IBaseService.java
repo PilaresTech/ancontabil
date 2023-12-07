@@ -12,7 +12,7 @@ import br.com.pilares.ancontabil.model.form.FormBase;
 public interface IBaseService<E extends EntityBase, F extends FormBase<E>, FE extends FormBase<E>, D extends BaseDTO<E, D>, DD extends BaseDetailsDTO<E>> {
 
 	List<D> getAll();
-	DD getById(Long id) throws NotFoundException;
+	DD getByIdAndHash(Long id, String hash) throws NotFoundException;
 	List<E> getList(List<Long> ids);
 	E createBase(F form);
 	DD create(F form);

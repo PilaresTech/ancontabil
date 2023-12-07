@@ -1,5 +1,6 @@
 package br.com.pilares.ancontabil.service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,7 +19,7 @@ public abstract class BaseService
 	EC extends IConverterBase<E, F, FE, D, DD>, 
 	E extends EntityBase, F extends FormBase<E>, FE extends FormBase<E>, D extends BaseDTO<E, D>, DD extends BaseDetailsDTO<E>> 
 	implements IBaseService<E, F, FE, D, DD>{
-
+		
 	private ER repository;
 	private EC converter;
 	
@@ -36,8 +37,8 @@ public abstract class BaseService
 	}
 	
 	@Override
-	public DD getById(Long id) throws NotFoundException {
-		Optional<E> optional = repository.findById(id);
+	public DD getByIdAndHash(Long id, String hash) throws NotFoundException {
+		Optional<E> optional = repository.findByIdAndHash(id, hash);
 		if(optional.isPresent()) {
 			return converter.entityParaDetailsDTO(optional.get());			
 		}

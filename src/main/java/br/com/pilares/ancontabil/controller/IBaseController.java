@@ -17,7 +17,7 @@ public interface IBaseController <
 	E extends EntityBase, F extends FormBase<E>, FE extends FormBase<E>, D extends BaseDTO<E, D>, DD extends BaseDetailsDTO<E> >{
 
 	List<D> get();
-	DD getId(@PathVariable Long id) throws NotFoundException;
+	DD getId(@PathVariable Long id, @PathVariable String hash) throws NotFoundException;
 	DD post(@RequestBody F form);
 	DD put(@PathVariable Long id, @RequestBody FE formEdit) throws NotFoundException;
 	void delete(@PathVariable Long id) throws NotFoundException;

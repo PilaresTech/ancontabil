@@ -36,10 +36,10 @@ public abstract class BaseController<
 		return service.getAll();
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("/{id}/{hash}")
 	@Override
-	public DD getId(Long id) throws NotFoundException {
-		return service.getById(id);
+	public DD getId(Long id, String hash) throws NotFoundException {
+		return service.getByIdAndHash(id, hash);
 	}
 	
 	@PostMapping
