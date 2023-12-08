@@ -1,18 +1,19 @@
 package br.com.pilares.ancontabil.service;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.pilares.ancontabil.converter.IConverterBase;
+import br.com.pilares.ancontabil.exception.BaseException;
+import br.com.pilares.ancontabil.exception.ValidacaoException;
 import br.com.pilares.ancontabil.model.dto.BaseDTO;
 import br.com.pilares.ancontabil.model.dto.BaseDetailsDTO;
 import br.com.pilares.ancontabil.model.entities.EntityBase;
 import br.com.pilares.ancontabil.model.form.FormBase;
 import br.com.pilares.ancontabil.repository.BaseRepository;
+import br.com.pilares.ancontabil.util.MessageSourceUtil;
 
 public abstract class BaseService 
 	<ER extends BaseRepository<E>, 
@@ -22,6 +23,8 @@ public abstract class BaseService
 		
 	private ER repository;
 	private EC converter;
+	@Autowired
+	private MessageSourceUtil messageSourceUtil;
 	
 	public void beforeCreate(F form){ }
 	public void afterCreate(F form, E entity){ }
@@ -37,18 +40,17 @@ public abstract class BaseService
 	}
 	
 	@Override
-	public DD getByIdAndHash(Long id, String hash) throws NotFoundException {
+	public DD getByIdAndHash(Long id, String hash) throws BaseException{
 		Optional<E> optional = repository.findByIdAndHash(id, hash);
 		if(optional.isPresent()) {
 			return converter.entityParaDetailsDTO(optional.get());			
 		}
-		throw new NotFoundException();
+		throw new ValidacaoException(messageSourceUtil.getMessage("error.recurso_nao_encontrado"));		
 	}
 	
 	@Override
 	public List<E> getList(List<Long> ids) {
 		return repository.findAllById(ids);
-		
 	}
 
 	@Override
@@ -68,23 +70,23 @@ public abstract class BaseService
 	}
 	
 	@Override
-	public DD edit(Long id, FE formEdit) throws NotFoundException {
+	public DD edit(Long id, FE formEdit) throws BaseException {
 		Optional<E> optional = repository.findById(id);
 		if(optional.isPresent()) {
 			E entity = repository.save(converter.setarValoresEditar(optional.get(), formEdit));
 			return converter.entityParaDetailsDTO(entity);			
 		}
-		throw new NotFoundException();
+		throw new ValidacaoException(messageSourceUtil.getMessage("error.recurso_nao_encontrado"));
 	}
 	
 	@Override
-	public void disable(Long id) throws NotFoundException{
+	public void disable(Long id) throws BaseException{
 		Optional<E> entity = repository.findById(id);
 		if(entity.isPresent()) {
 			entity.get().setDesabilitado(true);
 			repository.save(entity.get());
 		}else {
-			throw new NotFoundException();			
+			throw new ValidacaoException(messageSourceUtil.getMessage("error.recurso_nao_encontrado"));		
 		}
 	}
 	

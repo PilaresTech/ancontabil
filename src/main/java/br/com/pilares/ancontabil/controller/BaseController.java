@@ -10,12 +10,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.pilares.ancontabil.exception.BaseException;
 import br.com.pilares.ancontabil.factory.IBaseFactory;
 import br.com.pilares.ancontabil.model.dto.BaseDTO;
 import br.com.pilares.ancontabil.model.dto.BaseDetailsDTO;
 import br.com.pilares.ancontabil.model.entities.EntityBase;
 import br.com.pilares.ancontabil.model.form.FormBase;
 import br.com.pilares.ancontabil.service.IBaseService;
+import br.com.pilares.ancontabil.util.MessageSourceUtil;
 
 @RestController
 public abstract class BaseController<
@@ -25,7 +27,7 @@ public abstract class BaseController<
 	S, E, F, FE, D, DD>{
 	
 	private S service;
-	
+		
 	public BaseController(S service) {
 		this.service = service;
 	}
@@ -38,7 +40,7 @@ public abstract class BaseController<
 	
 	@GetMapping("/{id}/{hash}")
 	@Override
-	public DD getId(Long id, String hash) throws NotFoundException {
+	public DD getId(Long id, String hash) throws BaseException {
 		return service.getByIdAndHash(id, hash);
 	}
 	
@@ -50,13 +52,13 @@ public abstract class BaseController<
 	
 	@PutMapping("/{id}")
 	@Override
-	public DD put(Long id, FE formEdit) throws NotFoundException {
+	public DD put(Long id, FE formEdit) throws BaseException {
 		return service.edit(id, formEdit);
 	}
 	
 	@DeleteMapping("/{id}")
 	@Override
-	public void delete(Long id) throws NotFoundException {
+	public void delete(Long id) throws BaseException {
 		service.disable(id);
 	}
 	
