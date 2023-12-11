@@ -1,5 +1,7 @@
 package br.com.pilares.ancontabil.model.entities;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,4 +29,8 @@ public class Perfil implements GrantedAuthority{
 		return this.nome;
 	}
 
+	public static String getPerfis(List<Perfil> perfis){
+		return null;
+	}
+	
 }

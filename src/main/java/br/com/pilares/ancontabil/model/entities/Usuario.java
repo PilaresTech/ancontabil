@@ -37,7 +37,7 @@ public class Usuario implements UserDetails{
 	@ManyToOne
 	private Pessoa pessoa;
 	private String senha;
-	@ManyToMany(fetch= FetchType.LAZY)
+	@ManyToMany(fetch= FetchType.EAGER)
 	@JoinTable(name = "usuario_perfis", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "perfil_id"))
 	private List<Perfil> perfis = new ArrayList<>();
 	

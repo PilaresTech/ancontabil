@@ -14,11 +14,15 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import br.com.pilares.ancontabil.filter.AuthenticationFilter;
+import br.com.pilares.ancontabil.repository.UsuarioRepository;
 import br.com.pilares.ancontabil.service.LoginService;
+import br.com.pilares.ancontabil.service.TokenService;
 
 @Configuration
 @EnableWebSecurity
@@ -28,6 +32,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
 	private LoginService loginService;
 	
+	@Autowired
+	private TokenService tokenService;
+	
+	@Autowired
+	private UsuarioRepository usuarioRepository;
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
         http
@@ -35,7 +45,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .authorizeRequests(requests -> requests
                         .antMatchers(HttpMethod.POST, "/login/**").permitAll()
                         .anyRequest().authenticated()).csrf(csrf -> csrf.disable())
-                .sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+                .sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .addFilterBefore(new AuthenticationFilter(tokenService, usuarioRepository), UsernamePasswordAuthenticationFilter.class);
 	}
 	
 	@Override
