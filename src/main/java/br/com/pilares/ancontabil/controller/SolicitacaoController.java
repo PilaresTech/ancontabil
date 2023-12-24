@@ -9,19 +9,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.pilares.ancontabil.feignclients.MessageClient;
 import br.com.pilares.ancontabil.model.dto.MessageDTO;
+import br.com.pilares.ancontabil.model.dto.SolicitacaoDTO;
+import br.com.pilares.ancontabil.model.dto.SolicitacaoDetailsDTO;
+import br.com.pilares.ancontabil.model.entities.Solicitacao;
 import br.com.pilares.ancontabil.model.form.MessageForm;
+import br.com.pilares.ancontabil.model.form.SolicitacaoForm;
+import br.com.pilares.ancontabil.service.ProdutoService;
 import br.com.pilares.ancontabil.service.SolicitacaoService;
 
 @RestController
 @RequestMapping("/solicitacao")
-public class SolicitacaoController {
-	
-	@Autowired
-	private SolicitacaoService solicitacaoService;
-	
-	@PostMapping
-	public ResponseEntity<MessageDTO> notificarSolicitacao(@RequestBody MessageForm form){
-		return solicitacaoService.notificarSolicitacao(form);
-	}
+public class SolicitacaoController extends BaseController<
+	SolicitacaoService, Solicitacao, SolicitacaoForm, SolicitacaoForm, SolicitacaoDTO, SolicitacaoDetailsDTO>{
 
+	public SolicitacaoController(SolicitacaoService service) {
+		super(service);
+	}
 }

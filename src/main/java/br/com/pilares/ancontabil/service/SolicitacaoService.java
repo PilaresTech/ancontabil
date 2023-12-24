@@ -7,25 +7,34 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
+import br.com.pilares.ancontabil.converter.PessoaConverter;
+import br.com.pilares.ancontabil.converter.SolicitacaoConverter;
 import br.com.pilares.ancontabil.feignclients.MessageClient;
 import br.com.pilares.ancontabil.model.dto.MessageDTO;
+import br.com.pilares.ancontabil.model.dto.SolicitacaoDTO;
+import br.com.pilares.ancontabil.model.dto.SolicitacaoDetailsDTO;
+import br.com.pilares.ancontabil.model.entities.Pagamento;
+import br.com.pilares.ancontabil.model.entities.Solicitacao;
 import br.com.pilares.ancontabil.model.form.MessageForm;
+import br.com.pilares.ancontabil.model.form.PagamentoForm;
+import br.com.pilares.ancontabil.model.form.SolicitacaoForm;
+import br.com.pilares.ancontabil.repository.PessoaRepository;
+import br.com.pilares.ancontabil.repository.SolicitacaoRepository;
 import feign.FeignException;
 
 @Service
-public class SolicitacaoService {
+public class SolicitacaoService extends BaseService<SolicitacaoRepository, SolicitacaoConverter, Solicitacao, SolicitacaoForm, SolicitacaoForm, SolicitacaoDTO, SolicitacaoDetailsDTO> {
 
+	public SolicitacaoService(SolicitacaoConverter converter, SolicitacaoRepository repository) {
+		super(converter, repository);
+	}
+	
 	@Autowired
-	private MessageClient messageClient;
+	private PagamentoService pagamentoService;
 
-	public ResponseEntity<MessageDTO> notificarSolicitacao(@RequestBody MessageForm form){
-		try {
-			ResponseEntity<MessageDTO> result = messageClient.notificarSolicitacao(form);
-			return result;
-		} catch(FeignException e) {
-			//mandar novamente para a fila
-			return null;
-		}
+	@Override
+	public void afterCreate(SolicitacaoForm form, Solicitacao entity) {
+		entity.getPagamentos().add(pagamentoService.createBase(new PagamentoForm(entity)));
 	}
 	
 }
