@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.com.pilares.ancontabil.model.entities.Usuario;
 
-public interface UsuarioRepository extends JpaRepository<Usuario,Long>{
+public interface UsuarioRepository extends BaseRepository<Usuario>{
 
 	Optional<Usuario> findByPessoaDocumento(String documento);
 	

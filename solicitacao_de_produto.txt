@@ -1,0 +1,10 @@
+{pessoa} {solicita} um {produto}
+	busca por {contrato}s vinculados com {pessoa} 
+	verifica nesses se está valido e se tem o {produto}
+		caso sim
+	notificar -> "Solicitação {solicitacao.numero} está com o status de {solicitacao.status}. /n estará na fatura de {solicitacao.data.mes} do contrato N{numero}."
+	retorna a solicitacao
+		caso não
+	solicitar novo pagamento no mercado pago
+	notificar -> "Solicitação {solicitacao.numero} está com o status de {solicitacao.status}. /n Efetue o pagamento da 1 parte do solicitação em solicitacao.pagamento[0].link}."
+	retorna a solicitacao

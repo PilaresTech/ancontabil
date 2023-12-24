@@ -19,5 +19,6 @@ public interface IBaseService<E extends EntityBase, F extends FormBase<E>, FE ex
 	DD create(F form);
 	DD edit(Long id, FE formEdit) throws BaseException;
 	void disable(Long id) throws BaseException;
+	E reSave(E entity);
 	
 }

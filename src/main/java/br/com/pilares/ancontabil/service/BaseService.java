@@ -90,4 +90,9 @@ public abstract class BaseService
 		}
 	}
 	
+	@Override
+	public E reSave(E entity) {
+		return repository.save(entity);
+	}
+	
 }
